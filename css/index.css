@@ -234,3 +234,16 @@ section#messages li button {
 section#messages li button:hover {
     background-color: #c0392b;
 }
+
+@media (max-width: 480px) {
+    form[name="leave_message"] input,
+    form[name="leave_message"] textarea {
+        padding: 16px;
+        font-size: 18px;
+    }
+    form[name="leave_message"] button {
+        width: 100%;
+        padding: 16px;
+        font-size: 18px;
+    }
+}
