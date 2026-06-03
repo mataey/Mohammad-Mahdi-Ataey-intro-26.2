@@ -51,3 +51,25 @@ messageForm.addEventListener('submit', function(event){
     
     messageForm.reset();
 });
+fetch('https://api.github.com/users/mataey/repos')
+.then(response => {
+    if (!response.ok) {
+        throw new Error(response.status);
+    }
+    return response.json();
+})
+.then(repo => {
+    console.log(repo);
+
+    const projectSection = document.getElementById('projects');
+    const projectList = projectSection.querySelector('ul');
+
+    for (let i = 0; i < repo.length; i++) {
+        const project = document.createElement('li');
+        project.innerText = repo[i].name;
+        projectList.appendChild(project);
+    }
+})
+.catch(error => {
+    console.error(error);
+});
