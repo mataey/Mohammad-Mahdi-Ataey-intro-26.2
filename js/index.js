@@ -51,6 +51,7 @@ messageForm.addEventListener('submit', function(event){
     
     messageForm.reset();
 });
+
 fetch('https://api.github.com/users/mataey/repos')
 .then(response => {
     if (!response.ok) {
@@ -58,18 +59,25 @@ fetch('https://api.github.com/users/mataey/repos')
     }
     return response.json();
 })
-.then(repo => {
-    console.log(repo);
+.then(repositories => {
+    console.log(repositories);
 
     const projectSection = document.getElementById('projects');
     const projectList = projectSection.querySelector('ul');
 
-    for (let i = 0; i < repo.length; i++) {
+    for (let i = 0; i < repositories.length; i++) {
         const project = document.createElement('li');
-        project.innerText = repo[i].name;
+        project.innerText = repositories[i].name;
         projectList.appendChild(project);
     }
 })
 .catch(error => {
     console.error(error);
+    const projectSection = document.getElementById('projects');
+    const projectList = projectSection.querySelector('ul');
+    if (projectList) {
+        const errorMessage = document.createElement('li');
+        errorMessage.innerText = "Sorry, failed to load repositories.";
+        projectList.appendChild(errorMessage);
+    }
 });
