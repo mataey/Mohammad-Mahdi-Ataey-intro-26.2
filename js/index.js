@@ -51,3 +51,33 @@ messageForm.addEventListener('submit', function(event){
     
     messageForm.reset();
 });
+
+fetch('https://api.github.com/users/mataey/repos')
+.then(response => {
+    if (!response.ok) {
+        throw new Error(response.status);
+    }
+    return response.json();
+})
+.then(repositories => {
+    console.log(repositories);
+
+    const projectSection = document.getElementById('projects');
+    const projectList = projectSection.querySelector('ul');
+
+    for (let i = 0; i < repositories.length; i++) {
+        const project = document.createElement('li');
+        project.innerText = repositories[i].name;
+        projectList.appendChild(project);
+    }
+})
+.catch(error => {
+    console.error(error);
+    const projectSection = document.getElementById('projects');
+    const projectList = projectSection.querySelector('ul');
+    if (projectList) {
+        const errorMessage = document.createElement('li');
+        errorMessage.innerText = "Sorry, failed to load repositories.";
+        projectList.appendChild(errorMessage);
+    }
+});

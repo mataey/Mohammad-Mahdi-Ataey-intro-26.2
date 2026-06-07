@@ -247,3 +247,25 @@ section#messages li button:hover {
         font-size: 18px;
     }
 }
+
+#projects ul {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 0;
+    list-style: none;
+}
+
+#projects li {
+    background-color: #f4f4f4;
+    padding: 15px 20px;
+    border-radius: 8px;
+    border-left: 5px solid #0076ff;
+    font-weight: bold;
+    transition: transform 0.2s ease;
+}
+
+#projects li:hover {
+    transform: translateY(-3px);
+    background-color: #eee;
+}
